@@ -2,35 +2,43 @@ body {
     font-family: "Hiragino Mincho Pro", "MS PMincho", "MS Mincho", "serif";
     margin: 0;
     padding: 0;
-    background-color: #696969; /* 背景色を黒に設定 */
-    color: #d3d3d3; /* テキストの色を白に設定 */
+    background-image: url('images/Back.png'); /* 適切な背景画像に置き換えてください */
+    background-size: cover; /* 画面全体に背景画像を表示 */
+    background-attachment: fixed; /* スクロールしても背景画像を固定 */
+    background-position: center;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-header {
-    background-color: #000000;
-    color: white;
-    padding: 15px 0;
-    text-align: center;
-}
 
 main {
-    flex: 1; /* Allows main to expand and push footer to the bottom */
-    padding: 20px;
-    text-align: center;
-    margin-bottom: 60px; /* Adjust to ensure content is not hidden behind footer */
+    flex: 1;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+#intro-image {
+    height: 100vh;
+    background-image: url('images/icon.png'); /* 適切な背景画像に置き換えてください */
+    background-size: cover;
+    background-position: center;
 }
 
 #intro-container, #game-container {
     margin: auto;
     padding: 20px;
-    background-color: #000000; /* コンテナの背景色を濃いグレーに設定 */
+    background-color: rgba(0, 0, 0, 0.8); /* 半透明の黒背景 */
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    color: #f0f8ff;
     width: 80%;
     max-width: 600px;
+    text-align: center;
+}
+
+#intro-container {
+    margin-top: 50px;
 }
 
 canvas {
@@ -69,11 +77,11 @@ button {
 }
 
 footer {
-    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.7); /* 半透明の黒背景 */
     color: #d3d3d3;
     padding: 10px 0;
     text-align: center;
-    position: fixed;
     width: 100%;
+    position: fixed;
     bottom: 0;
 }

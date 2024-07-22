@@ -5,22 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>しりとリンク</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon"> <!-- ファビコンのパスを修正 -->
 </head>
 <body>
-    <header>
-        <h1>しりとリンク</h1>
-    </header>
 
     <main>
-        <div id="intro-container">
+        <section id="intro-image">
+            <!-- 背景画像がCSSで設定されます -->
+        </section>
+        <section id="intro-container">
             <h2>ゲーム説明</h2>
             <p>このゲームでは、しりとりをしながら言葉を円形に並べます。</p>
             <p>前の言葉の終わりの文字から始まる言葉しか入力できません。</p>
             <p>円の一番最初の言葉の頭文字 と 最後の言葉の終わりの文字 が一致すると、円が完成しボーナスがもらえます。</p>
             <p>より多くの言葉を並べてスコアを稼ぎましょう。</p>
             <button id="start-game">ゲーム開始</button>
-        </div>
-        <div id="game-container" style="display: none;">
+        </section>
+        <section id="game-container" style="display: none;">
             <canvas id="game-canvas"></canvas>
             <input type="text" id="input-word" placeholder="言葉を入力してください">
             <button id="submit-word">送信</button>
@@ -28,7 +29,7 @@
             <div id="score">スコア: <span id="score-value">0</span></div>
             <div id="hint">ヒント: <span id="hint-value"></span></div>
             <div id="completed-circles"></div>
-        </div>
+        </section>
     </main>
 
     <footer>
