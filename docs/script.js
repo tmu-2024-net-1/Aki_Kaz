@@ -15,7 +15,7 @@ canvas.height = 400;
 
 let words = [];
 let score = 0;
-let timeLeft = 60;s
+let timeLeft = 60;
 let timer;
 
 const startTimer = () => {
@@ -84,7 +84,7 @@ submitButton.addEventListener('click', () => {
             score += 10;
             scoreDisplay.textContent = score;
             saveCompletedCircle(words.join(''));
-            alert('完全な円が完成しました！ボーナスポイント！');
+            alert('円 完成！！ボーナスポイント +10!');
             words = [];  // Reset words array for new round
         }
     } else {
@@ -97,6 +97,7 @@ startButton.addEventListener('click', () => {
     gameContainer.style.display = 'block';
     startTimer();
 });
+
 document.addEventListener('DOMContentLoaded', () => {
     const inputWord = document.getElementById('input-word');
     const submitButton = document.getElementById('submit-word');
