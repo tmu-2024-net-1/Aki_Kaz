@@ -1,4 +1,3 @@
-/* 既存のCSSの内容を保持 */
 body {
     font-family: "Hiragino Mincho Pro", "MS PMincho", "MS Mincho", "serif";
 
@@ -40,7 +39,7 @@ main {
 
 #intro-image {
     height: 100vh;
-    background-image: url('images/icon.png'); /* 適切な背景画像に置き換えてください */
+    background-image: url('images/icon.png'); 
     background-size: cover;
     background-position: center;
     opacity: 0; 
