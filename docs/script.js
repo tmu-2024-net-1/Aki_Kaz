@@ -32,6 +32,7 @@ const startTimer = () => {
     }, 1000);
 }
 
+
 const drawCharacters = (ctx, characters) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
