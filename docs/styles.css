@@ -19,12 +19,21 @@ main {
     padding-bottom: 60px;
 }
 
+
 #intro-image {
     height: 100vh;
-    background-image: url('images/icon.png');
+    background-image: url('images/icon.png'); /* 適切な背景画像に置き換えてください */
     background-size: cover;
     background-position: center;
+    opacity: 0; /* 初期状態では透明 */
+    transition: opacity 2s ease-in; /* フェーズインのアニメーション */
 }
+
+
+#intro-image.visible {
+    opacity: 1; /* アニメーション後の状態 */
+}
+
 
 #intro-container, #game-container, #ranking-container {
     margin: auto;
