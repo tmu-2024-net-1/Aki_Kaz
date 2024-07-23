@@ -53,9 +53,10 @@ main {
 canvas {
     display: block;
     margin: 20px auto;
-    border: 1px solid #ccc;
-    background-color: #ffffff;
+    border: transparent;
+    background-color: transparent; /* 背景色を透明に設定 */
 }
+
 
 input {
     width: 70%;

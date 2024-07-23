@@ -34,6 +34,8 @@ const startTimer = () => {
 
 const drawCharacters = (ctx, characters) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+
     let angle = 0;
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
@@ -44,7 +46,8 @@ const drawCharacters = (ctx, characters) => {
     }
 
     const fontSize = 20;
-    ctx.font = `${fontSize}px Arial`;
+    ctx.font = `${fontSize}px "Hiragino Mincho Pro", "MS PMincho", "MS Mincho", serif`; // 明朝体を指定
+    ctx.fillStyle = 'white'; 
 
     for (let i = 0; i < characters.length; i++) {
         const char = characters[i];
@@ -57,6 +60,8 @@ const drawCharacters = (ctx, characters) => {
         angle += (2 * Math.PI) / characters.length;
     }
 }
+
+
 
 const isValidWord = (newWord) => {
     if (words.length === 0) return true;
