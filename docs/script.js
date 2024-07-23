@@ -12,6 +12,7 @@ const gameContainer = document.getElementById('game-container');
 const resetButton = document.getElementById('reset-game');
 const rankingList = document.getElementById('ranking-list');
 
+
 canvas.width = 400;
 canvas.height = 400;
 
@@ -20,6 +21,8 @@ let score = 0;
 let timeLeft = 60;
 let timer;
 let scoreAdded = false;
+
+
 
 const startTimer = () => {
     timer = setInterval(() => {
@@ -33,22 +36,23 @@ const startTimer = () => {
 }
 
 
+
 const drawCharacters = (ctx, characters) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
 
     let angle = 0;
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
     let radius = 50 + characters.length * 5;
 
-    if (radius > 150) {
-        radius = 150;
+    if (radius > 190) {
+        radius = 190;
     }
 
     const fontSize = 20;
     ctx.font = `${fontSize}px "Hiragino Mincho Pro", "MS PMincho", "MS Mincho", serif`; // 明朝体を指定
     ctx.fillStyle = 'white'; 
+
 
     for (let i = 0; i < characters.length; i++) {
         const char = characters[i];
@@ -60,6 +64,7 @@ const drawCharacters = (ctx, characters) => {
         ctx.restore();
         angle += (2 * Math.PI) / characters.length;
     }
+
 }
 
 
@@ -69,6 +74,7 @@ const isValidWord = (newWord) => {
     const lastWord = words[words.length - 1];
     return lastWord[lastWord.length - 1] === newWord[0];
 }
+
 
 const saveCompletedCircle = (characters) => {
     const newCanvas = document.createElement('canvas');
@@ -80,13 +86,15 @@ const saveCompletedCircle = (characters) => {
     drawCharacters(newCtx, characters);
 }
 
+
+
 const endGame = () => {
     if (!scoreAdded) {
         alert('ゲームオーバー！スコア: ' + score);
         addScoreToRanking(score);
         scoreAdded = true;
     }
-    resetButton.style.display = 'block'; // 再プレイボタンを表示
+    resetButton.style.display = 'block'; 
 }
 
 const startNewGame = () => {
@@ -95,13 +103,15 @@ const startNewGame = () => {
     timeLeft = 60;
     scoreDisplay.textContent = score;
     timerDisplay.textContent = timeLeft;
-    completedCircles.innerHTML = ''; // 完成した円をクリア
-    resetButton.style.display = 'none'; // 再プレイボタンを非表示
+    completedCircles.innerHTML = ''; 
+    resetButton.style.display = 'none'; 
     gameContainer.style.display = 'block';
     score
-    scoreAdded = false; // スコア追加フラグをリセット
-    startTimer(); // 新しいゲームを開始するためにタイマーを再スタート
+    scoreAdded = false; 
+    startTimer(); 
 }
+
+
 
 const addScoreToRanking = (score) => {
     const rankings = JSON.parse(localStorage.getItem('rankings')) || [];
@@ -114,6 +124,8 @@ const addScoreToRanking = (score) => {
     updateRankingList();
 }
 
+
+
 const updateRankingList = () => {
     const rankings = JSON.parse(localStorage.getItem('rankings')) || [];
     rankingList.innerHTML = '';
@@ -123,6 +135,7 @@ const updateRankingList = () => {
         rankingList.appendChild(listItem);
     });
 }
+
 
 submitButton.addEventListener('click', () => {
     const newWord = inputWord.value.trim();
@@ -149,6 +162,10 @@ submitButton.addEventListener('click', () => {
     }
 });
 
+
+
+//ボタン操作
+
 startButton.addEventListener('click', () => {
     introContainer.style.display = 'none';
     gameContainer.style.display = 'block';
@@ -156,6 +173,8 @@ startButton.addEventListener('click', () => {
 });
 
 resetButton.addEventListener('click', startNewGame);
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const introImage = document.getElementById('intro-image');
@@ -166,8 +185,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 100); // 少し遅らせてアニメーションを開始
 
 
+
     const inputWord = document.getElementById('input-word');
     const submitButton = document.getElementById('submit-word');
+
 
     inputWord.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
@@ -175,6 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
             submitButton.click();
         }
     });
+
 
     updateRankingList(); // ページロード時にランキングを更新
 });

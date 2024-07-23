@@ -1,17 +1,21 @@
 /* 既存のCSSの内容を保持 */
 body {
     font-family: "Hiragino Mincho Pro", "MS PMincho", "MS Mincho", "serif";
+
     margin: 0;
     padding: 0;
+
     background-image: url('images/Back.png');
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
+
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     color: #f0f8ff;
 }
+
 
 @keyframes fadeIn {
     from {
@@ -21,7 +25,6 @@ body {
         opacity: 1;
     }
 }
-
 .fade-in {
     animation: fadeIn 0.5s ease-in-out;
 }
@@ -40,13 +43,11 @@ main {
     background-image: url('images/icon.png'); /* 適切な背景画像に置き換えてください */
     background-size: cover;
     background-position: center;
-    opacity: 0; /* 初期状態では透明 */
-    transition: opacity 2s ease-in; /* フェーズインのアニメーション */
+    opacity: 0; 
+    transition: opacity 2s ease-in; 
 }
-
-
 #intro-image.visible {
-    opacity: 1; /* アニメーション後の状態 */
+    opacity: 1; 
 }
 
 
@@ -65,11 +66,12 @@ main {
     margin-top: 50px;
 }
 
+
 canvas {
     display: block;
     margin: 20px auto;
     border: transparent;
-    background-color: transparent; /* 背景色を透明に設定 */
+    background-color: transparent;
 }
 
 
@@ -107,6 +109,7 @@ button {
     left: -9999px;
 }
 
+
 #ranking-container {
     margin-top: 20px;
 }
@@ -120,6 +123,7 @@ button {
     margin: 5px 0;
     font-size: 18px;
 }
+
 
 footer {
     background-color: rgba(0, 0, 0, 0.7);
