@@ -4,11 +4,12 @@ const inputWord = document.getElementById('input-word');
 const submitButton = document.getElementById('submit-word');
 const timerDisplay = document.getElementById('time-left');
 const scoreDisplay = document.getElementById('score-value');
-const hintDisplay = document.getElementById('hint-value');
+const errorMessage = document.getElementById('error-message');
 const completedCircles = document.getElementById('completed-circles');
 const startButton = document.getElementById('start-game');
 const introContainer = document.getElementById('intro-container');
 const gameContainer = document.getElementById('game-container');
+const resetButton = document.getElementById('reset-game');
 
 canvas.width = 400;
 canvas.height = 400;
@@ -24,7 +25,7 @@ const startTimer = () => {
         timerDisplay.textContent = timeLeft;
         if (timeLeft <= 0) {
             clearInterval(timer);
-            alert('ゲームオーバー！スコア: ' + score);
+            endGame();
         }
     }, 1000);
 }
@@ -71,8 +72,51 @@ const saveCompletedCircle = (characters) => {
     drawCharacters(newCtx, characters);
 }
 
+const endGame = () => {
+    alert('ゲームオーバー！スコア: ' + score);
+    saveGameProgress();
+    resetButton.style.display = 'block'; // 再プレイボタンを表示
+}
+
+const startNewGame = () => {
+    words = [];
+    score = 0;
+    timeLeft = 60;
+    scoreDisplay.textContent = score;
+    timerDisplay.textContent = timeLeft;
+    completedCircles.innerHTML = ''; // 完成した円をクリア
+    resetButton.style.display = 'none'; // 再プレイボタンを非表示
+    gameContainer.style.display = 'block';
+    startTimer();
+}
+
+const saveGameProgress = () => {
+    localStorage.setItem('words', JSON.stringify(words));
+    localStorage.setItem('score', score);
+    localStorage.setItem('timeLeft', timeLeft);
+}
+
+const loadGameProgress = () => {
+    const savedWords = JSON.parse(localStorage.getItem('words'));
+    const savedScore = localStorage.getItem('score');
+    const savedTimeLeft = localStorage.getItem('timeLeft');
+
+    if (savedWords && savedScore && savedTimeLeft) {
+        words = savedWords;
+        score = savedScore;
+        timeLeft = savedTimeLeft;
+
+        scoreDisplay.textContent = score;
+        timerDisplay.textContent = timeLeft;
+        drawCharacters(ctx, words.join(''));
+        startTimer();
+    }
+}
+
 submitButton.addEventListener('click', () => {
     const newWord = inputWord.value.trim();
+    errorMessage.textContent = '';
+
     if (newWord && isValidWord(newWord)) {
         words.push(newWord);
         drawCharacters(ctx, words.join(''));
@@ -85,10 +129,12 @@ submitButton.addEventListener('click', () => {
             scoreDisplay.textContent = score;
             saveCompletedCircle(words.join(''));
             alert('円 完成！！ボーナスポイント +10!');
-            words = [];  // Reset words array for new round
+            words = [];
         }
+
+        saveGameProgress();
     } else {
-        alert('無効な言葉です。前の言葉の終わりの文字から始まる言葉を入力してください。');
+        errorMessage.textContent = '無効な言葉です。前の言葉の終わりの文字から始まる言葉を入力してください。';
     }
 });
 
@@ -98,15 +144,18 @@ startButton.addEventListener('click', () => {
     startTimer();
 });
 
+resetButton.addEventListener('click', startNewGame);
+
 document.addEventListener('DOMContentLoaded', () => {
     const inputWord = document.getElementById('input-word');
     const submitButton = document.getElementById('submit-word');
 
-    // エンターキーが押されたときのイベントリスナー
     inputWord.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
-            event.preventDefault(); // デフォルトのエンターキーアクションを防止
-            submitButton.click();  // ボタンのクリックイベントをトリガー
+            event.preventDefault();
+            submitButton.click();
         }
     });
+
+    loadGameProgress();
 });

@@ -5,18 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>しりとリンク</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon"> <!-- ファビコンのパスを修正 -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <main>
-        <section id="intro-image">
-            <!-- 背景画像がCSSで設定されます -->
-        </section>
+        <section id="intro-image"></section>
         <section id="intro-container">
             <h2>ゲーム説明</h2>
             <p>このゲームでは、しりとりをしながら言葉を円形に並べます。</p>
             <p>前の言葉の終わりの文字から始まる言葉しか入力できません。</p>
-            <p>円の一番最初の言葉の頭文字 と 最後の言葉の終わりの文字 が一致すると、円が完成しボーナスがもらえます。</p>
+            <p>円の一番最初の言葉の頭文字と最後の言葉の終わりの文字が一致すると、円が完成しボーナスがもらえます。</p>
             <p>より多くの言葉を並べてスコアを稼ぎましょう。</p>
             <button id="start-game">ゲーム開始</button>
         </section>
@@ -26,15 +24,14 @@
             <button id="submit-word">送信</button>
             <div id="timer">タイマー: <span id="time-left">60</span>秒</div>
             <div id="score">スコア: <span id="score-value">0</span></div>
-            <div id="hint">ヒント: <span id="hint-value"></span></div>
+            <div id="error-message"></div>
             <div id="completed-circles"></div>
+            <button id="reset-game" style="display: none;">もう一度プレイ</button> <!-- 追加されたボタン -->
         </section>
     </main>
-
     <footer>
         <p>&copy; 2024 しりとリンク - Kazuyoshi Akimori.</p>
     </footer>
-    
     <script src="script.js"></script>
 </body>
 </html>
