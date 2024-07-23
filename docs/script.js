@@ -10,6 +10,7 @@ const startButton = document.getElementById('start-game');
 const introContainer = document.getElementById('intro-container');
 const gameContainer = document.getElementById('game-container');
 const resetButton = document.getElementById('reset-game');
+const rankingList = document.getElementById('ranking-list');
 
 canvas.width = 400;
 canvas.height = 400;
@@ -18,6 +19,7 @@ let words = [];
 let score = 0;
 let timeLeft = 60;
 let timer;
+let scoreAdded = false;
 
 const startTimer = () => {
     timer = setInterval(() => {
@@ -73,8 +75,11 @@ const saveCompletedCircle = (characters) => {
 }
 
 const endGame = () => {
-    alert('ゲームオーバー！スコア: ' + score);
-    saveGameProgress();
+    if (!scoreAdded) {
+        alert('ゲームオーバー！スコア: ' + score);
+        addScoreToRanking(score);
+        scoreAdded = true;
+    }
     resetButton.style.display = 'block'; // 再プレイボタンを表示
 }
 
@@ -87,30 +92,30 @@ const startNewGame = () => {
     completedCircles.innerHTML = ''; // 完成した円をクリア
     resetButton.style.display = 'none'; // 再プレイボタンを非表示
     gameContainer.style.display = 'block';
-    startTimer();
+    score
+    scoreAdded = false; // スコア追加フラグをリセット
+    startTimer(); // 新しいゲームを開始するためにタイマーを再スタート
 }
 
-const saveGameProgress = () => {
-    localStorage.setItem('words', JSON.stringify(words));
-    localStorage.setItem('score', score);
-    localStorage.setItem('timeLeft', timeLeft);
-}
-
-const loadGameProgress = () => {
-    const savedWords = JSON.parse(localStorage.getItem('words'));
-    const savedScore = localStorage.getItem('score');
-    const savedTimeLeft = localStorage.getItem('timeLeft');
-
-    if (savedWords && savedScore && savedTimeLeft) {
-        words = savedWords;
-        score = savedScore;
-        timeLeft = savedTimeLeft;
-
-        scoreDisplay.textContent = score;
-        timerDisplay.textContent = timeLeft;
-        drawCharacters(ctx, words.join(''));
-        startTimer();
+const addScoreToRanking = (score) => {
+    const rankings = JSON.parse(localStorage.getItem('rankings')) || [];
+    rankings.push(score);
+    rankings.sort((a, b) => b - a); // スコアを降順にソート
+    if (rankings.length > 10) {
+        rankings.pop(); // ランキングが10件を超えた場合、最も低いスコアを削除
     }
+    localStorage.setItem('rankings', JSON.stringify(rankings));
+    updateRankingList();
+}
+
+const updateRankingList = () => {
+    const rankings = JSON.parse(localStorage.getItem('rankings')) || [];
+    rankingList.innerHTML = '';
+    rankings.forEach((score, index) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${index + 1}位 :  ${score} pt`;
+        rankingList.appendChild(listItem);
+    });
 }
 
 submitButton.addEventListener('click', () => {
@@ -128,20 +133,20 @@ submitButton.addEventListener('click', () => {
             score += 10;
             scoreDisplay.textContent = score;
             saveCompletedCircle(words.join(''));
-            alert('円 完成！！ボーナスポイント +10!');
+            alert('円 完成！！ボーナスポイント + 10pt！');
             words = [];
         }
 
         saveGameProgress();
     } else {
-        errorMessage.textContent = '無効な言葉です。前の言葉の終わりの文字から始まる言葉を入力してください。';
+        errorMessage.innerHTML = 'その言葉はルール違反です。<br> 前の言葉の終わりの文字から始まる言葉を入力してください。';
     }
 });
 
 startButton.addEventListener('click', () => {
     introContainer.style.display = 'none';
     gameContainer.style.display = 'block';
-    startTimer();
+    startNewGame();
 });
 
 resetButton.addEventListener('click', startNewGame);
@@ -157,5 +162,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    loadGameProgress();
+    updateRankingList(); // ページロード時にランキングを更新
 });

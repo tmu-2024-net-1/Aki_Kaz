@@ -26,7 +26,7 @@ main {
     background-position: center;
 }
 
-#intro-container, #game-container {
+#intro-container, #game-container, #ranking-container {
     margin: auto;
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.8);
@@ -64,7 +64,7 @@ button {
     color: white;
     border: none;
     border-radius: 5px;
-    margin: 10px; /* ボタンの周りにマージンを追加 */
+    margin: 10px;
 }
 
 #timer, #score, #error-message {
@@ -80,6 +80,20 @@ button {
 #completed-circles {
     position: absolute;
     left: -9999px;
+}
+
+#ranking-container {
+    margin-top: 20px;
+}
+
+#ranking-list {
+    list-style: none;
+    padding: 0;
+}
+
+#ranking-list li {
+    margin: 5px 0;
+    font-size: 18px;
 }
 
 footer {
