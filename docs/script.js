@@ -50,7 +50,7 @@ const drawCharacters = (ctx, characters) => {
     }
 
     const fontSize = 20;
-    ctx.font = `${fontSize}px "Hiragino Mincho Pro", "MS PMincho", "MS Mincho", serif`; // 明朝体を指定
+    ctx.font = `${fontSize}px "Hiragino Mincho Pro", "MS PMincho", "MS Mincho", serif`; 
     ctx.fillStyle = 'white'; 
 
 
@@ -176,13 +176,13 @@ resetButton.addEventListener('click', startNewGame);
 
 
 
+
 document.addEventListener('DOMContentLoaded', () => {
     const introImage = document.getElementById('intro-image');
     
-    // ページが完全に読み込まれた後にアニメーションを開始
     setTimeout(() => {
         introImage.classList.add('visible');
-    }, 100); // 少し遅らせてアニメーションを開始
+    }, 100); 
 
 
 
@@ -198,6 +198,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    updateRankingList(); // ページロード時にランキングを更新
+    updateRankingList(); 
 });
 
