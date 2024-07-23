@@ -149,6 +149,8 @@ const updateRankingList = () => {
 }
 
 
+//ボタン操作
+
 submitButton.addEventListener('click', () => {
     const newWord = inputWord.value.trim();
     errorMessage.textContent = '';
@@ -173,10 +175,6 @@ submitButton.addEventListener('click', () => {
         errorMessage.innerHTML = 'その言葉はルール違反です。<br> 前の言葉の終わりの文字から始まる言葉を入力してください。';
     }
 });
-
-
-
-//ボタン操作
 
 startButton.addEventListener('click', () => {
     introContainer.style.display = 'none';
