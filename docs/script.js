@@ -37,6 +37,19 @@ const startTimer = () => {
 
 
 
+const drawCharacter = (ctx, char, angle, radius, delay) => {
+    setTimeout(() => {
+        ctx.save();
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.rotate(angle);
+        ctx.textAlign = 'center';
+        ctx.font = '20px "Hiragino Mincho Pro", "MS PMincho", "MS Mincho", serif';
+        ctx.fillStyle = 'white';
+        ctx.fillText(char, radius, 0);
+        ctx.restore();
+    }, delay);
+}
+
 const drawCharacters = (ctx, characters) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -51,21 +64,18 @@ const drawCharacters = (ctx, characters) => {
 
     const fontSize = 20;
     ctx.font = `${fontSize}px "Hiragino Mincho Pro", "MS PMincho", "MS Mincho", serif`; 
-    ctx.fillStyle = 'white'; 
-
+    ctx.fillStyle = 'white';
 
     for (let i = 0; i < characters.length; i++) {
         const char = characters[i];
-        ctx.save();
-        ctx.translate(centerX, centerY);
-        ctx.rotate(angle);
-        ctx.textAlign = 'center';
-        ctx.fillText(char, radius, 0);
-        ctx.restore();
+        drawCharacter(ctx, char, angle, radius, i * 100);
         angle += (2 * Math.PI) / characters.length;
     }
-
 }
+
+
+
+
 
 
 
@@ -85,6 +95,8 @@ const saveCompletedCircle = (characters) => {
     const newCtx = newCanvas.getContext('2d');
     drawCharacters(newCtx, characters);
 }
+
+
 
 
 
@@ -116,9 +128,9 @@ const startNewGame = () => {
 const addScoreToRanking = (score) => {
     const rankings = JSON.parse(localStorage.getItem('rankings')) || [];
     rankings.push(score);
-    rankings.sort((a, b) => b - a); // スコアを降順にソート
+    rankings.sort((a, b) => b - a); 
     if (rankings.length > 10) {
-        rankings.pop(); // ランキングが10件を超えた場合、最も低いスコアを削除
+        rankings.pop(); 
     }
     localStorage.setItem('rankings', JSON.stringify(rankings));
     updateRankingList();
